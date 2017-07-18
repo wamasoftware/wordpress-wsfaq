@@ -3,9 +3,7 @@ if (!defined('ABSPATH'))
     exit;
 
 class Getallfaq {
-
     function getallfaqshortcode($attribute) {
-
         extract(shortcode_atts(array(
             "limit" => '',
             "category" => '',
@@ -15,15 +13,13 @@ class Getallfaq {
         } else {
             $posts_per_page = '-1';
         }
-
         if ($category) {
             $cat = $category;
         } else {
             $cat = '';
         }
-
         $singleopen = 'true';
-        $transitionSpeed = '300';
+        $transitionSpeed = '350';
         ob_start();
         $post_type = 'simfaq';
         $orderby = 'post_date';

@@ -110,7 +110,25 @@ Class Simplefaqinit {
             break;
     }
     return $output;    
-}    
+}   
+
+function simfaq_custom_columns($output, $column_name, $term_id){
+    $theme = get_term($term_id, 'simfaq_texonamy');
+    switch ($column_name) {
+        case 'title':
+            echo get_the_title();
+        break;
+
+        case 'Views':             
+             echo '[simplefaq category="' . $term_id. '"]';
+        break;
+ 
+        default:
+            break;
+    }
+    return $output; 
+    
+}
     function simplefaq_add_js_head() {
         wp_enqueue_script('jqueryuijs', plugins_url("/js/jquery-ui-accordion.js", __FILE__));
         wp_enqueue_style('jqueryuicss', plugins_url("/css/jquery-ui-accordion.css", __FILE__));
@@ -118,6 +136,54 @@ Class Simplefaqinit {
     function simplefaq_add_js_adminhead(){
          wp_enqueue_style('admincss', plugins_url("/css/style.css", __FILE__));
     }
+    
+    function post_column_views($newcolumn){
+    //Retrieves the translated string, if translation exists, and assign it to the 'default' array.
+    $newcolumn['post_views'] = __('Views');
+    return $newcolumn;
+}
+    
+    function setPostViews($postID) {
+
+    $user_ip = $_SERVER['REMOTE_ADDR']; //retrieve the current IP address of the visitor
+    $key = $user_ip . 'x' . $postID; //combine post ID & IP to form unique key
+    $value = array($user_ip, $postID); // store post ID & IP as separate values (see note)
+    $visited = get_transient($key); //get transient and store in variable
+
+    //check to see if the Post ID/IP ($key) address is currently stored as a transient
+    if ( false === ( $visited ) ) {
+
+        //store the unique key, Post ID & IP address for 12 hours if it does not exist
+        set_transient( $key, $value, 60*60*12 );
+
+        // now run post views function
+        $count_key = 'views';
+        $count = get_post_meta($postID, $count_key, true);
+        if($count==''){
+            $count = 0;
+            delete_post_meta($postID, $count_key);
+            add_post_meta($postID, $count_key, '0');
+        }else{
+            $count++;
+            update_post_meta($postID, $count_key, $count);
+        }
+
+
+    }
+
+}
+
+function getPostViews($postID){
+    $count_key = 'post_views_count';
+    $count = get_post_meta($postID, $count_key, true);
+    if($count==''){
+        delete_post_meta($postID, $count_key);
+        add_post_meta($postID, $count_key, '0');
+        return "0 View";
+    }
+    return $count.' Views';
+}
+
 }
 
 $simplefaq = new Simplefaqinit();
@@ -125,7 +191,9 @@ add_action('init', array($simplefaq, 'simplefaq_custom_post_type'), 0);
 add_action('init', array($simplefaq, 'simplefaq_post_taxomomy'), 0);
 add_action('admin_menu', array($simplefaq, 'simplefaqmenu'), 0);
 add_filter('manage_simfaq_texonamy_custom_column', array($simplefaq,'simfaq_cat_columns'),10,3);
+add_filter('manage_posts_columns', array($simplefaq,'post_column_views'));
 add_filter('manage_edit-simfaq_texonamy_columns', array($simplefaq,'simfaq_cat_manage_columns'));
+//add_filter('manage_edit-simfaq_posts_columns', array($simplefaq,'simfaq_custom_columns'));
 add_action('init', array($simplefaq, 'getlistoffaq'), 0);
 add_action('wp_head', array($simplefaq, 'simplefaq_add_js_head'));
 add_action('admin_enqueue_scripts', array($simplefaq, 'simplefaq_add_js_adminhead'));
