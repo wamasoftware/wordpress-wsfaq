@@ -3,6 +3,11 @@ if (!defined('ABSPATH'))
     exit;
 
 class Getallfaq {
+
+    public function __construct() {
+        $this->simfaq = new Simplefaqinit();
+    }
+
     function getallfaqshortcode($attribute) {
         extract(shortcode_atts(array(
             "limit" => '',
@@ -53,6 +58,10 @@ class Getallfaq {
                             }
                             ?>
                             <div class="faq-content"><?php the_content(); ?></div>
+                            <div class="post-id" id="postid"><?php $postID=get_the_ID();
+                                    echo $this->simfaq->setPostViews($postID);
+                            ?></div>
+                            <div id="rslt"></div>
                         </div>
                     </div>
                     <?php
@@ -77,5 +86,4 @@ class Getallfaq {
         <?php
         return ob_get_clean();
     }
-
 }
