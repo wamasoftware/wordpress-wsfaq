@@ -1,5 +1,4 @@
 <?php
-
 /*
   Plugin Name:Simple FAQ
   Description:In This You Can add FAQ Category wise.
@@ -39,7 +38,6 @@ Class Simplefaqinit {
             'search_items' => __('Search FAQ', 'simple-faq'),
             'not_found' => __('Not Found', 'simple-faq'),
             'not_found_in_trash' => __('Not found in Trash', 'simple-faq'),);
-
         $args = array(
             'label' => __('FAQ', 'simple-faq'),
             'description' => __('Frequently asked questions', 'simple-faq'),
@@ -61,7 +59,6 @@ Class Simplefaqinit {
         );
         register_post_type('simfaq', $args);
     }
-
     function simplefaq_post_taxomomy() {
         $labels = array(
             'name' => _x('Category', 'taxonomy general name'),
@@ -86,7 +83,6 @@ Class Simplefaqinit {
         );
         register_taxonomy('simfaq_texonamy', 'simfaq', $args);
     }
-
     function simfaq_cat_manage_columns($theme_columns) {
         $new_columns = array(
             'cb' => '<input type="checkbox" />',
@@ -97,7 +93,6 @@ Class Simplefaqinit {
         );
         return $new_columns;
     }
-
     function simfaq_cat_columns($output, $column_name, $term_id) {
         $theme = get_term($term_id, 'simfaq_texonamy');
         switch ($column_name) {
@@ -108,22 +103,18 @@ Class Simplefaqinit {
             case 'simfaq_category_shortcode':
                 echo '[simplefaq category="' . $term_id . '"]';
                 break;
-
             default:
                 break;
         }
         return $output;
     }
-
     function simplefaq_add_js_head() {
         wp_enqueue_script('jqueryuijs', plugins_url("/js/jquery-ui-accordion.js", __FILE__));
         wp_enqueue_style('jqueryuicss', plugins_url("/css/jquery-ui-accordion.css", __FILE__));
     }
-
     function simplefaq_add_js_adminhead() {
         wp_enqueue_style('admincss', plugins_url("/css/style.css", __FILE__));
     }
-
 }
 
 $simplefaq = new Simplefaqinit();

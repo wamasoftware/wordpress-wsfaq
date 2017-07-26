@@ -41,35 +41,44 @@ class Getallfaq {
 
         $query = new WP_Query($args);
         $post_count = $query->post_count;
+        if ($cat != "") {
+            $quantityTermObject = get_term_by('id', absint($cat), 'simfaq_texonamy');
+            $quantityTermName = $quantityTermObject->name;
+            echo $quantityTermName;
+        }
+         else {
+             $quantityTermName="All FAQ";
+             echo $quantityTermName;
+         }
         $i = 1;
         if ($post_count > 0) :
             ?>
             <div class="simple-faq-accordion" data-accordion-group>	
-                <?php while ($query->have_posts()) : $query->the_post();
-                    ?>			  
+            <?php while ($query->have_posts()) : $query->the_post();
+                ?>			  
                     <div data-accordion class="simple-faq-main">
 
                         <div data-control class="simple-faq-title"><h4> <?php the_title(); ?></h4></div>
                         <div data-content>
-                            <?php
-                            if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
+                <?php
+                if (function_exists('has_post_thumbnail') && has_post_thumbnail()) {
 
-                                the_post_thumbnail('thumbnail');
-                            }
-                            ?>
+                    the_post_thumbnail('thumbnail');
+                }
+                ?>
                             <div class="faq-content"><?php the_content(); ?></div>
                             <div id="rslt"></div>
                         </div>
                     </div>
-                    <?php
-                    $i++;
-                endwhile;
-                ?>
+                <?php
+                $i++;
+            endwhile;
+            ?>
             </div>
-            <?php
-        endif;
-        wp_reset_query();
-        ?>
+                <?php
+            endif;
+            wp_reset_query();
+            ?>
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 jQuery('.simple-faq-accordion [data-accordion]').accordionfaq({
