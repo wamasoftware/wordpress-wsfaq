@@ -116,7 +116,6 @@ Class Simplefaqinit {
         wp_enqueue_style('admincss', plugins_url("/css/style.css", __FILE__));
     }
 }
-
 $simplefaq = new Simplefaqinit();
 add_action('init', array($simplefaq, 'simplefaq_custom_post_type'), 0);
 add_action('init', array($simplefaq, 'simplefaq_post_taxomomy'), 0);
