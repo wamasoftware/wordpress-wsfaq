@@ -2,13 +2,13 @@
 if (!defined('ABSPATH'))
     exit;
 
-class Getallfaq {
+class Categorised_Getallfaq {
 
     public function __construct() {
-        $this->simfaq = new Simplefaqinit();
+        $this->simfaq = new Categorised_Simplefaqinit();
     }
 
-    function getallfaqshortcode($attribute) {
+    function Categorised_getallfaqshortcode($attribute) {
         extract(shortcode_atts(array(
             "limit" => '',
             "category" => '',
@@ -91,5 +91,4 @@ class Getallfaq {
         <?php
         return ob_get_clean();
     }
-
 }

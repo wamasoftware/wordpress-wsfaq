@@ -1,8 +1,8 @@
 <?php
 if (!defined('ABSPATH'))
     exit;
-class SimpleFaqsettings{
-    function settings(){
+class Categorised_SimpleFaqsettings{
+    function Categorised_settings(){
         ?>
 <div class="settingsbox">
     <div><h2>How To Use All Shortcode.</h2></div>
