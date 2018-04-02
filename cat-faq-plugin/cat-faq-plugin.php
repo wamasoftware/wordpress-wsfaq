@@ -179,11 +179,9 @@ class CatFaqPlugin {
             ?>
                 <?php $abc = get_the_category($query->$post_id); ?>
                 <?php if($category->term_id == get_the_category($post->ID)[0]->term_id){ ?>
-                    <div class="container">
-                        <div class="cat_<?php echo $abc[0]->term_id; ?> cat_all" style="margin-bottom:15px;">
-                            <div class="accordion"><?php echo get_the_title(); ?></div>
-                            <div class="answer"><?php echo get_the_content(); ?></div>
-                        </div>
+                    <div class="cat_<?php echo $abc[0]->term_id; ?> cat_all" style="margin-bottom:15px;">
+                        <div class="accordion"><?php echo get_the_title(); ?></div>
+                        <div class="answer"><?php echo get_the_content(); ?></div>
                     </div>
             <?php 
                 }
@@ -233,11 +231,9 @@ class CatFaqPlugin {
         if($query->have_posts()) : while($query->have_posts()) : $query->the_post();
             if($attr['id'] == get_the_category($post->ID)[0]->term_id){       
             ?>
-                <div class="container">
-                    <div class="cat_<?php echo $abc[0]->term_id; ?> cat_all" style="margin-bottom:15px;">
-                        <div class="accordion"><?php echo get_the_title(); ?></div>
-                        <div class="answer"><?php echo get_the_content(); ?></div>
-                    </div>
+                <div class="cat_<?php echo $abc[0]->term_id; ?> cat_all" style="margin-bottom:15px;">
+                    <div class="accordion"><?php echo get_the_title(); ?></div>
+                    <div class="answer"><?php echo get_the_content(); ?></div>
                 </div>
             <?php
             }

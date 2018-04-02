@@ -28,41 +28,6 @@
     content: "\2212";
 }
 
-/* 
-.panel {
-    padding: 0 18px;
-    background-color: white;
-    max-height: 0;
-    overflow: hidden;
-    display: none;
-    transition: max-height 0.2s ease-out;
-} */
-
-
-
-.container{
-    width: 500px;
-    margin: 0px auto;
-}
-
-/* .question{
-    padding:5px;
-    background-color: #e3e3e3;
-    cursor: pointer;
-}
-
-question:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-
-.active:after {
-    content: "\2212";
-} */
-
 .answer{
     padding:5px;
     display: none;
