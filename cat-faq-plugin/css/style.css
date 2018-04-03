@@ -1,8 +1,7 @@
 .accordion {
-    background-color: #eee;
-    color: #444;
+    background-color:white;
     cursor: pointer;
-    padding: 18px;
+    padding: 18px 0px!important;
     width: 100%;
     border: none;
     text-align: left;
@@ -12,8 +11,9 @@
     border-radius: 20px;
 }
 
-.active, .accordion:hover {
-    background-color: #ccc;
+.active, .accordion:active, .accordion:hover{
+    background-color: white;
+    color: #E67E22;
 }
 
 .accordion:after {
@@ -31,9 +31,13 @@
 .answer{
     padding:5px;
     display: none;
+    font-weight: 500 !important;
+    margin-left: 15px;
+    border-left: 2px solid #E67E22;
+    font-size: 15px;
 }
 
-input[type=text] {
+input[type=text], #selectdrp {
     width: 146px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -49,7 +53,7 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, #selectdrp:focus {
     width: 100%;
 }
 
@@ -57,4 +61,11 @@ input[type=text]:focus {
     width:50%;
     margin: 0 auto;
     margin-top:20px;
+}
+#selectdrp{
+    width: 100%;
+}
+.faq_active{
+    color: #E67E22;
+    font-weight: bold;
 }
